@@ -11,11 +11,12 @@ export const useElementOnScreen = (options) => {
   };
 
   useEffect(() => {
+    const contRef = containerRef.current;
     const observer = new IntersectionObserver(callbackFn, options);
-    if (containerRef.current) observer.observe(containerRef.current);
+    if (containerRef && contRef) observer.observe(contRef);
 
     return () => {
-      if (containerRef.current) observer.unobserve(containerRef.current);
+      if (containerRef && contRef) observer.unobserve(contRef);
     };
   }, [containerRef, options]);
 

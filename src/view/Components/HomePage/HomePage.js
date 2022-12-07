@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from "react";
+import React, { useEffect, useState, memo, useContext } from "react";
 import { fetchAllCharacters } from "../../../service/api";
 import {
   IoChevronUpCircleOutline,
@@ -8,7 +8,6 @@ import {
 
 import Character from "../../../entities/Character";
 import CharacterCard from "../elements/CharacterCard";
-
 import styled from "styled-components";
 
 const CardWrapper = styled.div`
@@ -59,7 +58,6 @@ const HomePage = () => {
     });
   }, [page]);
 
-  console.log(page);
   const buttonPrevHandler = () => {
     setPage((prev) => prev - 1);
     if (page <= 1) {

@@ -1,14 +1,16 @@
 import { Routes, Route } from "react-router-dom";
 import { useDarkMode } from "../../../hooks/useDarkMode";
 
-import HomePage from "../HomePage/HomePage";
-import About from "../About/About";
-import MyFavorites from "../MyFavorites/MyFavorites";
-import Navbar from "../Navbar/Navbar";
+import ErrorBoundary from "../ErrorBoundary";
+import HomePage from "../HomePage";
+import About from "../About";
+import MyFavorites from "../MyFavorites";
+import Navbar from "../Navbar";
 
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../globalStyles";
 import { lightTheme, darkTheme } from "../Theme";
+import BookmarkContextProvider from "../../../context/BookmarkContextProvider";
 
 const App = () => {
   const [theme, themeToggler] = useDarkMode();
@@ -24,11 +26,15 @@ const App = () => {
             theme={theme}
             toggleTheme={themeToggler}
           />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/favorite" element={<MyFavorites />} />
-          </Routes>
+          <ErrorBoundary>
+            <BookmarkContextProvider>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/favorite" element={<MyFavorites />} />
+              </Routes>
+            </BookmarkContextProvider>
+          </ErrorBoundary>
         </div>
       </>
     </ThemeProvider>

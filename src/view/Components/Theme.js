@@ -33,6 +33,8 @@ export const lightTheme = {
   characterNameColor: "skyblue",
   arrowColor: "rgba(87, 155, 201, 1)",
   arrowHoverColor: "darkcyan",
+  fallbackBgColor: "skyblue",
+  fallbackBorderColor: "black",
 };
 export const darkTheme = {
   body: "#363537",
@@ -48,4 +50,6 @@ export const darkTheme = {
   characterNameColor: "#ffe549",
   arrowColor: "#ffe549",
   arrowHoverColor: "orange",
+  fallbackBgColor: "#363537",
+  fallbackBorderColor: "#ffe549",
 };

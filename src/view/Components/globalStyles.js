@@ -1,8 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 export const GlobalStyles = createGlobalStyle`
   body {
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
     font-family: "Sriracha", cursive;
@@ -52,6 +52,51 @@ export const GlobalStyles = createGlobalStyle`
     color:  ${({ theme }) => theme.arrowColor};
     &:hover {
       color: ${({ theme }) => theme.arrowHoverColor};
+    }
+  }
+  .fallbackText {
+    max-width: 255px;
+  word-wrap: break-word;
+  margin-bottom: 12px;
+  line-height: 24px;
+  position: relative;
+  padding: 30px 30px;
+  border-radius: 30px;
+  background: white;
+  color: black;
+  align-self: flex-start;
+  }
+  .fallbackText:before,
+  .fallbackText:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 25px;
+    @media (max-width: 370px) {
+      display: none;
+    }
+  }
+  .fallbackText:before {
+    left: -7px;
+    width: 26px;
+    background-color: white;
+    border-bottom-right-radius: 16px 14px;
+  }
+  .fallbackText:after {
+    left: -26px;
+    width: 26px;
+    background-color: ${({ theme }) => theme.fallbackBgColor};
+    border-bottom-right-radius: 10px;
+    @media (max-width: 370px) {
+      display: none;
+    }
+  }
+  .fallbackWrapper {
+    background-color: ${({ theme }) => theme.fallbackBgColor};
+    border: 3px solid ${({ theme }) => theme.fallbackBorderColor};
+    @media (max-width: 370px) {
+      background-color: transparent;
+      border: none;
     }
   }
   `;

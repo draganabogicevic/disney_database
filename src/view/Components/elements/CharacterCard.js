@@ -1,3 +1,4 @@
+import { useState, useContext } from "react";
 import { useElementOnScreen } from "../../../hooks/useElementOnScreen";
 import { IoHeartOutline, IoHeart } from "react-icons/io5";
 
@@ -5,7 +6,7 @@ import Button from "./Button";
 
 import styled from "styled-components";
 import placeholder from "../../../assets/jpg/placeholder.jpg";
-import { useState } from "react";
+import BookmarkContext from "../../../context/bookmarkContext";
 
 const Card = styled.div`
   height: 270px;
@@ -37,13 +38,14 @@ const CharacterCard = ({ character }) => {
     threshold: 0,
   });
 
-  console.log(character);
+  const ctx = useContext(BookmarkContext);
 
   const image = character.image ? character.image : placeholder;
 
   const handleBookmark = () => {
     character.toggleBookmark();
     setIsBookmarked(!isBookmarked);
+    ctx.onSelectHandler(character);
   };
 
   return (
