@@ -1,30 +1,42 @@
 import { useState, useEffect } from "react";
+
 import BookmarkContext from "./bookmarkContext";
+
+import CharacterFromLs from "../entities/CharacterFromLs";
 
 const getDataFromLs = () => {
   const dataFromLs = JSON.parse(localStorage.getItem("favoriteCharacters"));
 
-  return dataFromLs;
+  const prevBookmarkedCharacters = dataFromLs
+    ? dataFromLs.map((item) => new CharacterFromLs(item))
+    : [];
+
+  // const prevBookmarkedCharacters = dataFromLs
+  //   ? [dataFromLs.map((item) => new CharacterFromLs(item))]
+  //   : [];
+  return prevBookmarkedCharacters;
 };
 
 getDataFromLs();
 const BookmarkContextProvider = (props) => {
   const prevBookmarkedCharacters = getDataFromLs();
-  console.log("prev", prevBookmarkedCharacters);
+
   const [bookmarkedCharacters, setBookmarkedCharacters] = useState([
     ...prevBookmarkedCharacters,
   ]);
 
   const onSelectHandler = (character) => {
-    setBookmarkedCharacters(() => {
-      console.log(character.bookmarked);
-      return character.bookmarked
-        ? [character, ...bookmarkedCharacters]
-        : bookmarkedCharacters.filter((item) => item.id !== character.id);
-    });
+    if (character.bookmarked) {
+      setBookmarkedCharacters((prevBookmarked) => [
+        ...prevBookmarked,
+        character,
+      ]);
+    } else {
+      setBookmarkedCharacters((prevBookmarked) =>
+        prevBookmarked.filter((item) => item.id !== character.id)
+      );
+    }
   };
-
-  console.log(bookmarkedCharacters);
 
   const saveToLocalStorage = (selectedCharacters) => {
     localStorage.setItem(
@@ -33,14 +45,16 @@ const BookmarkContextProvider = (props) => {
     );
   };
 
+  const contextValue = {
+    bookmarkedCharacters,
+    setBookmarkedCharacters,
+    onSelectHandler,
+    saveToLocalStorage,
+  };
+
   useEffect(() => {
     saveToLocalStorage(bookmarkedCharacters);
   }, [bookmarkedCharacters]);
-
-  const contextValue = {
-    bookmarkedCharacters,
-    onSelectHandler,
-  };
 
   return (
     <BookmarkContext.Provider value={contextValue}>

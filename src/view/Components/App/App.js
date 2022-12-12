@@ -30,8 +30,8 @@ const App = () => {
             <BookmarkContextProvider>
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/about" element={<About />} />
                 <Route path="/favorite" element={<MyFavorites />} />
+                <Route path="/about" element={<About />} />
               </Routes>
             </BookmarkContextProvider>
           </ErrorBoundary>

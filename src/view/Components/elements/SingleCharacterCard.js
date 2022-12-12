@@ -8,7 +8,7 @@ import placeholder from "../../../assets/jpg/placeholder.jpg";
 import BookmarkContext from "../../../context/bookmarkContext";
 
 const Card = styled.div`
-  height: 270px;
+  height: 600px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@ const CardControls = styled.div`
   padding: 10px;
 `;
 
-const CharacterCard = (props) => {
+const SingleCharacterCard = (props) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const ctx = useContext(BookmarkContext);
 
@@ -64,4 +64,4 @@ const CharacterCard = (props) => {
   );
 };
 
-export default memo(CharacterCard);
+export default memo(SingleCharacterCard);

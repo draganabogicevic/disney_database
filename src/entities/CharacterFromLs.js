@@ -1,11 +1,11 @@
 export default class Character {
-  constructor({ _id, name, films, imageUrl, url }) {
-    this.id = _id;
+  constructor({ id, name, films, image, url, bookmarked }) {
+    this.id = id;
     this.name = name;
     this.films = films;
-    this.image = imageUrl;
+    this.image = image;
     this.url = url;
-    this.bookmarked = false;
+    this.bookmarked = bookmarked;
   }
   toggleBookmark() {
     this.bookmarked = !this.bookmarked;

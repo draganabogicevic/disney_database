@@ -35,6 +35,8 @@ export const lightTheme = {
   arrowHoverColor: "darkcyan",
   fallbackBgColor: "skyblue",
   fallbackBorderColor: "black",
+  searchIconAndBorderColor: "darkcyan",
+  inputText: "darkcyan",
 };
 export const darkTheme = {
   body: "#363537",
@@ -52,4 +54,6 @@ export const darkTheme = {
   arrowHoverColor: "orange",
   fallbackBgColor: "#363537",
   fallbackBorderColor: "#ffe549",
+  searchIconAndBorderColor: "#ffe549",
+  inputText: "#ffe549",
 };

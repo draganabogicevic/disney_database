@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyles = createGlobalStyle`
   body {
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
     font-family: "Sriracha", cursive;
@@ -55,7 +55,7 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
   .fallbackText {
-    max-width: 255px;
+  max-width: 255px;
   word-wrap: break-word;
   margin-bottom: 12px;
   line-height: 24px;
@@ -98,5 +98,14 @@ export const GlobalStyles = createGlobalStyle`
       background-color: transparent;
       border: none;
     }
+  }
+  .searchIcon {
+    color: ${({ theme }) => theme.searchIconAndBorderColor};
+    margin-right: 5px;
+  }
+  .searchInput {
+    border-bottom: 1px solid ${({ theme }) => theme.searchIconAndBorderColor};
+    color: ${({ theme }) => theme.inputText};
+    padding: 5px;
   }
   `;
