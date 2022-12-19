@@ -25,7 +25,7 @@ export const lightTheme = {
   animation: animationLightTheme(),
   buttonBackground: "skyblue",
   buttonBorderColor: "darkcyan",
-  navbarBg: "#FAFAFA",
+  navbarAndFooterBg: "#FAFAFA",
   logo: logoLight,
   cardShadow: "9px 9px 8px -1px rgba(87, 155, 201, 1)",
   cardBackground: "#FAFAFA",
@@ -37,6 +37,8 @@ export const lightTheme = {
   fallbackBorderColor: "black",
   searchIconAndBorderColor: "darkcyan",
   inputText: "darkcyan",
+  socialIconsColor: "darkcyan",
+  footerTextColor: "darkcyan",
 };
 export const darkTheme = {
   body: "#363537",
@@ -44,7 +46,7 @@ export const darkTheme = {
   backgroundImg: stars,
   buttonBackground: "#363537",
   buttonBorderColor: "#ffe549",
-  navbarBg: "rgb(46, 46, 46)",
+  navbarAndFooterBg: "rgb(46, 46, 46)",
   logo: logoDark,
   cardShadow: "9px 9px 8px -1px rgba(255, 229, 73, 1)",
   cardBackground: "rgb(46, 46, 46)",
@@ -56,4 +58,6 @@ export const darkTheme = {
   fallbackBorderColor: "#ffe549",
   searchIconAndBorderColor: "#ffe549",
   inputText: "#ffe549",
+  socialIconsColor: "#ffe549",
+  footerTextColor: "#ffe549",
 };

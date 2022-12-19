@@ -92,9 +92,12 @@ const HomePage = () => {
       const dataToSave = data.map((c) => new Character(c));
       if (bookmarkedCharacters) {
         bookmarkedCharacters.map((item) => {
-          if (dataToSave.id === item.id) {
-            dataToSave.toggleBookmark();
-          }
+          dataToSave.map((character) => {
+            if (character.id === item.id) {
+              character.toggleBookmark();
+            }
+            return null;
+          });
           return null;
         });
       }

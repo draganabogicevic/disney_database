@@ -11,9 +11,24 @@ export const GlobalStyles = createGlobalStyle`
     background-repeat: "repeat";
     animation:${({ theme }) => theme.animation};   
   }
-  nav {
-    background: ${({ theme }) => theme.navbarBg};
+  nav, 
+  footer {
+    background: ${({ theme }) => theme.navbarAndFooterBg};
   }
+
+  footer {
+    padding: 30px 20px;
+    max-width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+    color: ${({ theme }) => theme.footerTextColor};
+  }
+
   button {
     background: ${({ theme }) => theme.buttonBackground};
     border: 1px solid ${({ theme }) => theme.buttonBorderColor};
@@ -107,5 +122,31 @@ export const GlobalStyles = createGlobalStyle`
     border-bottom: 1px solid ${({ theme }) => theme.searchIconAndBorderColor};
     color: ${({ theme }) => theme.inputText};
     padding: 5px;
+  }
+
+  .socialNetworks {
+    max-width: 60%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px; 
+    color: ${({ theme }) => theme.footerTextColor};
+    a {
+      margin: 10px;
+      color: ${({ theme }) => theme.socialIconsColor};
+    }
+    a:hover {
+      opacity: 0.5;
+    }
+    @media (max-width: 556px) {
+      max-width: 100%;
+      padding: 0 20px;
+      flex-direction: column;
+    }
+  }
+  .socialLinks {
+    display: flex;
+
   }
   `;

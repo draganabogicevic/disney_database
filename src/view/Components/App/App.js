@@ -6,6 +6,7 @@ import HomePage from "../HomePage";
 import About from "../About";
 import MyFavorites from "../MyFavorites";
 import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../globalStyles";
@@ -35,6 +36,7 @@ const App = () => {
               </Routes>
             </BookmarkContextProvider>
           </ErrorBoundary>
+          <Footer />
         </div>
       </>
     </ThemeProvider>
