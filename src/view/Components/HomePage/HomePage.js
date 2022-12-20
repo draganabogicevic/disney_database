@@ -106,8 +106,6 @@ const HomePage = () => {
     });
   }, [page]);
 
-  console.log(searchText);
-
   return (
     <>
       <ControlPrev>

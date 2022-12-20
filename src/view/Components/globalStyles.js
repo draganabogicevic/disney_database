@@ -17,8 +17,10 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   footer {
-    padding: 30px 20px;
-    max-width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding: 20px 20px;
+    width: 100%;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -42,9 +44,9 @@ export const GlobalStyles = createGlobalStyle`
     opacity: 0;
   }
   .card {
-    box-shadow: ${({ theme }) => theme.cardShadow};
-    background: ${({ theme }) => theme.cardBackground};
-    border: ${({ theme }) => theme.cardBorder}
+    box-shadow: ${({ theme }) => theme.cardAndModalShadow};
+    background: ${({ theme }) => theme.cardAndModalBackground};
+    border: ${({ theme }) => theme.cardAndModalBorder}
   }
   .characterName {
     text-align: center;
@@ -148,5 +150,16 @@ export const GlobalStyles = createGlobalStyle`
   .socialLinks {
     display: flex;
 
+  }
+  .modalWrapper {
+    background-color: ${({ theme }) => theme.cardAndModalBackground};
+    border: ${({ theme }) => theme.cardAndModalBorder};
+    box-shadow: ${({ theme }) => theme.cardAndModalShadow};
+  }
+  .modalRateAndButton {
+    display: flex;
+    justify-content: space-between;
+    aligne-items: center;
+    padding-bottom: 10px;
   }
   `;
