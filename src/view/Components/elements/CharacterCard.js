@@ -6,6 +6,7 @@ import Button from "./Button";
 import styled from "styled-components";
 import placeholder from "../../../assets/jpg/placeholder.jpg";
 import BookmarkContext from "../../../context/bookmarkContext";
+import Modal from "./Modal";
 
 const Card = styled.div`
   height: 270px;
@@ -34,33 +35,52 @@ const CardControls = styled.div`
   padding: 10px;
 `;
 
-const CharacterCard = (props) => {
+const CharacterCard = ({ character }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
   const ctx = useContext(BookmarkContext);
 
-  const image = props.character.image ? props.character.image : placeholder;
+  const image = character.image ? character.image : placeholder;
+  const body = document.querySelector("body");
+  showModal
+    ? (body.style.pointerEvents = "none")
+    : (body.style.pointerEvents = "auto");
 
   const handleBookmark = () => {
-    props.character.toggleBookmark();
+    character.toggleBookmark();
     setIsBookmarked(!isBookmarked);
-    ctx.onSelectHandler(props.character);
+    ctx.onSelectHandler(character);
+  };
+
+  const detailsHandler = () => {
+    setShowModal(true);
+  };
+
+  const closeDetailsHandler = () => {
+    setShowModal(false);
   };
 
   return (
-    <Card className={`card`}>
-      <CardImage image={image}></CardImage>
-      <div className="characterName">{props.character.name}</div>
-      <CardControls>
-        <div onClick={handleBookmark}>
-          {props.character.bookmarked ? (
-            <IoHeart size={20} />
-          ) : (
-            <IoHeartOutline size={20} />
-          )}
-        </div>
-        <Button>Details</Button>
-      </CardControls>
-    </Card>
+    <>
+      <Card className={`card`}>
+        <CardImage image={image} />
+        <div className="characterName">{character.name}</div>
+        <CardControls>
+          <div onClick={handleBookmark}>
+            {character.bookmarked ? (
+              <IoHeart size={20} />
+            ) : (
+              <IoHeartOutline size={20} />
+            )}
+          </div>
+          <Button onClick={detailsHandler}>Details</Button>
+        </CardControls>
+      </Card>
+      {showModal && (
+        <Modal closeModal={closeDetailsHandler} character={character} />
+      )}
+    </>
   );
 };
 

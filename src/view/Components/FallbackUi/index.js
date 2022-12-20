@@ -17,7 +17,7 @@ const FallbackImg = styled.img`
 
 const FallbackWrapper = styled.div`
   margin: auto;
-  margin-top: 100px;
+  margin-top: 30px;
   padding: 30px;
   display: flex;
   justify-content: center;
