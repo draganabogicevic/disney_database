@@ -13,7 +13,6 @@ export const fetchAllCharacters = async (str) => {
   const result = await Api.get(
     `https://api.disneyapi.dev/character?name=${str}`
   );
-  console.log(result.data.data);
   return result.data.data;
 };
 

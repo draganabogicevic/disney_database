@@ -7,6 +7,8 @@ import styled from "styled-components";
 import placeholder from "../../../assets/jpg/placeholder.jpg";
 import BookmarkContext from "../../../context/bookmarkContext";
 import Modal from "./Modal";
+import { useSelector } from "react-redux";
+import { get } from "lodash-es";
 
 const Card = styled.div`
   height: 270px;
@@ -35,22 +37,28 @@ const CardControls = styled.div`
   padding: 10px;
 `;
 
-const CharacterCard = ({ character }) => {
+const CharacterCard = ({ characterId }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const characterImage = useSelector((state) =>
+    get(state, `characters.characters[${characterId}].image`)
+  );
+  const characterName = useSelector((state) =>
+    get(state, `characters.characters[${characterId}].name`)
+  );
 
   const ctx = useContext(BookmarkContext);
 
-  const image = character.image ? character.image : placeholder;
+  const image = characterImage ? characterImage : placeholder;
   const body = document.querySelector("body");
   showModal
     ? (body.style.pointerEvents = "none")
     : (body.style.pointerEvents = "auto");
 
   const handleBookmark = () => {
-    character.toggleBookmark();
+    // character.toggleBookmark();
     setIsBookmarked(!isBookmarked);
-    ctx.onSelectHandler(character);
+    // ctx.onSelectHandler(character);
   };
 
   const detailsHandler = () => {
@@ -65,10 +73,10 @@ const CharacterCard = ({ character }) => {
     <>
       <Card className={`card`}>
         <CardImage image={image} />
-        <div className="characterName">{character.name}</div>
+        <div className="characterName">{characterName}</div>
         <CardControls>
           <div onClick={handleBookmark}>
-            {character.bookmarked ? (
+            {isBookmarked ? (
               <IoHeart size={20} />
             ) : (
               <IoHeartOutline size={20} />
@@ -78,7 +86,12 @@ const CharacterCard = ({ character }) => {
         </CardControls>
       </Card>
       {showModal && (
-        <Modal closeModal={closeDetailsHandler} character={character} />
+        <Modal
+          closeModal={closeDetailsHandler}
+          characterId={characterId}
+          characterImage={image}
+          characterName={characterName}
+        />
       )}
     </>
   );

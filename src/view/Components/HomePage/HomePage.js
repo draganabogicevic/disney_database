@@ -17,6 +17,9 @@ import CardWrapper from "../elements/CardWrapper";
 import SearchBar from "../elements/SearchBar";
 import SingleCharacterCard from "../elements/SingleCharacterCard";
 import NoCharacters from "../elements/NoCharacters";
+import { useDispatch, useSelector } from "react-redux";
+import { getCharacters } from "../../../redux-state/characters/reducer";
+import { get } from "lodash-es";
 
 const ControlPrev = styled.div`
   position: fixed;
@@ -45,7 +48,14 @@ const HomePage = () => {
   const [page, setPage] = useState(1);
   const [searchText, setSearchText] = useState("");
   const [charactersToShow, setCharactersToShow] = useState([]);
+  const listOfCharactersId = useSelector((state) =>
+    Object.keys(get(state, "characters.characters"))
+  );
+
+  console.log(listOfCharactersId);
+  // const { loading } = useSelector((state) => state.loading);
   const { bookmarkedCharacters } = useContext(BookmarkContext);
+  const dispatch = useDispatch();
 
   const buttonPrevHandler = () => {
     setPage((prev) => prev - 1);
@@ -88,23 +98,26 @@ const HomePage = () => {
   }, [searchText]);
 
   useEffect(() => {
-    fetchAllCharactersByPages(page).then((data) => {
-      const dataToSave = data.map((c) => new Character(c));
-      if (bookmarkedCharacters) {
-        bookmarkedCharacters.map((item) => {
-          dataToSave.map((character) => {
-            if (character.id === item.id) {
-              character.toggleBookmark();
-            }
-            return null;
-          });
-          return null;
-        });
-      }
+    dispatch(getCharacters(page));
+    // fetchAllCharactersByPages(page).then((data) => {
+    //
+    //   if (bookmarkedCharacters) {
+    //     bookmarkedCharacters.map((item) => {
+    //       dataToSave.map((character) => {
+    //         if (character.id === item.id) {
+    //           character.toggleBookmark();
+    //         }
+    //         return null;
+    //       });
+    //       return null;
+    //     });
+    //   }
 
-      setCharactersToShow(dataToSave);
-    });
+    //   setCharactersToShow(dataToSave);
+    // });
   }, [page]);
+
+  console.log();
 
   return (
     <>
@@ -122,12 +135,12 @@ const HomePage = () => {
       </ControlNext>
       <SearchBar setSearchText={setSearchText} searchText={searchText} />
       <CardWrapper>
-        {charactersToShow.length > 1 ? (
-          charactersToShow.map((c) => (
-            <CharacterCard character={c} key={c.id} />
+        {listOfCharactersId.length > 1 ? (
+          listOfCharactersId.map((id) => (
+            <CharacterCard characterId={id} key={id} />
           ))
-        ) : charactersToShow.length === 1 ? (
-          <SingleCharacterCard character={charactersToShow[0]} />
+        ) : listOfCharactersId.length === 1 ? (
+          <SingleCharacterCard character={listOfCharactersId[0]} />
         ) : (
           <NoCharacters setSearchText={setSearchText} />
         )}
