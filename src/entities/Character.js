@@ -5,9 +5,16 @@ export default class Character {
     this.films = films;
     this.image = imageUrl;
     this.url = url;
-    this.bookmarked = false;
   }
-  toggleBookmark() {
-    this.bookmarked = !this.bookmarked;
+
+  get characterObject() {
+    return {
+      id: this.id,
+      name: this.name,
+      films: this.films,
+      image: this.image,
+      url: this.url,
+      bookmarked: this.bookmarked,
+    };
   }
 }

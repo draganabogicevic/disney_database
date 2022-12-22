@@ -27,16 +27,14 @@ const characterSlices = createSlice({
     },
     [getCharacters.fulfilled]: (state, action) => {
       state.loading = false;
-      console.log(action.payload);
       const newCharacter = (action.payload || []).reduce(
         (res, current = {}) => ({
           ...res,
-          [current._id]: new Character(current),
+          [current._id]: new Character(current).characterObject,
         }),
         {}
       );
       state.characters = { ...state.characters, ...newCharacter };
-      console.log(state.characters);
     },
     [getCharacters.rejected]: (state) => {
       state.loading = false;
@@ -44,7 +42,6 @@ const characterSlices = createSlice({
   },
 });
 
-// export const { getCharactersRequest, getCharactersRequestSuccess } =
-//   characterSlices.actions;
+export const { bookmarkCharacter } = characterSlices.actions;
 
 export default characterSlices.reducer;

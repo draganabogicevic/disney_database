@@ -19,7 +19,9 @@ import SingleCharacterCard from "../elements/SingleCharacterCard";
 import NoCharacters from "../elements/NoCharacters";
 import { useDispatch, useSelector } from "react-redux";
 import { getCharacters } from "../../../redux-state/characters/reducer";
+import { bookmarkCharacter } from "../../../redux-state/characters/reducer";
 import { get } from "lodash-es";
+import { setBookmarked } from "../../../redux-state/bookmark/reducer";
 
 const ControlPrev = styled.div`
   position: fixed;
@@ -48,13 +50,16 @@ const HomePage = () => {
   const [page, setPage] = useState(1);
   const [searchText, setSearchText] = useState("");
   const [charactersToShow, setCharactersToShow] = useState([]);
+  const maxNumberOfPagesFromApi = 149;
   const listOfCharactersId = useSelector((state) =>
     Object.keys(get(state, "characters.characters"))
   );
 
+  const characters = useSelector((state) => state.characters);
+
   console.log(listOfCharactersId);
   // const { loading } = useSelector((state) => state.loading);
-  const { bookmarkedCharacters } = useContext(BookmarkContext);
+  const { bookmarkedCharacterIds } = useContext(BookmarkContext);
   const dispatch = useDispatch();
 
   const buttonPrevHandler = () => {
@@ -67,8 +72,8 @@ const HomePage = () => {
   const buttonNextHandler = () => {
     setPage((prev) => prev + 1);
     setSearchText("");
-    if (page >= 149) {
-      setPage(149);
+    if (page >= maxNumberOfPagesFromApi) {
+      setPage(maxNumberOfPagesFromApi);
     }
     return page;
   };
@@ -81,10 +86,10 @@ const HomePage = () => {
     if (searchText !== "") {
       fetchAllCharacters(searchText).then((data) => {
         const dataToSave = data.map((c) => new Character(c));
-        if (bookmarkedCharacters) {
-          bookmarkedCharacters.map((item) => {
+        if (bookmarkedCharacterIds) {
+          bookmarkedCharacterIds.map((item) => {
             dataToSave.map((c) => {
-              if (c.id === item.id) {
+              if (c.id === item) {
                 c.toggleBookmark();
               }
               return null;
@@ -116,8 +121,6 @@ const HomePage = () => {
     //   setCharactersToShow(dataToSave);
     // });
   }, [page]);
-
-  console.log();
 
   return (
     <>

@@ -7,8 +7,10 @@ import styled from "styled-components";
 import placeholder from "../../../assets/jpg/placeholder.jpg";
 import BookmarkContext from "../../../context/bookmarkContext";
 import Modal from "./Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash-es";
+import { bookmarkCharacter } from "../../../redux-state/characters/reducer";
+import { setBookmarked } from "../../../redux-state/bookmark/reducer";
 
 const Card = styled.div`
   height: 270px;
@@ -47,6 +49,8 @@ const CharacterCard = ({ characterId }) => {
     get(state, `characters.characters[${characterId}].name`)
   );
 
+  const dispatch = useDispatch();
+
   const ctx = useContext(BookmarkContext);
 
   const image = characterImage ? characterImage : placeholder;
@@ -56,9 +60,9 @@ const CharacterCard = ({ characterId }) => {
     : (body.style.pointerEvents = "auto");
 
   const handleBookmark = () => {
-    // character.toggleBookmark();
+    dispatch(setBookmarked({ characterId }));
     setIsBookmarked(!isBookmarked);
-    // ctx.onSelectHandler(character);
+    ctx.onSelectHandler(characterId);
   };
 
   const detailsHandler = () => {
