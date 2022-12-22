@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import bookmarkSlice from "./bookmark/reducer";
+import bookmarkedCharacterSlice from "./bookmark/reducer";
 import characterSlice from "./characters/reducer";
 
 const store = configureStore({
   reducer: {
     characters: characterSlice,
-    bookmark: bookmarkSlice,
+    bookmarkedCharacterIds: bookmarkedCharacterSlice,
   },
 });
+
+console.log(store.getState());
 
 export default store;

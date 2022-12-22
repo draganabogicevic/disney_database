@@ -42,6 +42,4 @@ const characterSlices = createSlice({
   },
 });
 
-export const { bookmarkCharacter } = characterSlices.actions;
-
 export default characterSlices.reducer;

@@ -55,8 +55,6 @@ const HomePage = () => {
     Object.keys(get(state, "characters.characters"))
   );
 
-  const characters = useSelector((state) => state.characters);
-
   console.log(listOfCharactersId);
   // const { loading } = useSelector((state) => state.loading);
   const { bookmarkedCharacterIds } = useContext(BookmarkContext);

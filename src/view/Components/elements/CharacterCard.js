@@ -9,7 +9,7 @@ import BookmarkContext from "../../../context/bookmarkContext";
 import Modal from "./Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash-es";
-import { bookmarkCharacter } from "../../../redux-state/characters/reducer";
+
 import { setBookmarked } from "../../../redux-state/bookmark/reducer";
 
 const Card = styled.div`
@@ -60,7 +60,7 @@ const CharacterCard = ({ characterId }) => {
     : (body.style.pointerEvents = "auto");
 
   const handleBookmark = () => {
-    dispatch(setBookmarked({ characterId }));
+    dispatch(setBookmarked(characterId));
     setIsBookmarked(!isBookmarked);
     ctx.onSelectHandler(characterId);
   };

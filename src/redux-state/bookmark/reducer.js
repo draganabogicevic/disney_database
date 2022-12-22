@@ -1,23 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  bookmark: false,
-  listOfBookmarked: [],
+  bookmarkedCharacterIds: [],
 };
 
-const bookmarkSlice = createSlice({
-  name: "bookmark",
+const bookmarkedCharacterSlice = createSlice({
+  name: "bookmarkedCharacterIds",
   initialState,
   reducers: {
     setBookmarked(state, action) {
-      state.listOfBookmarked.push({
-        id: action.payload.id,
-      });
-      console.log("state is", state);
+      console.log(action.payload);
+
+      state.bookmarkedCharacterIds.push(action.payload);
     },
   },
 });
 
-export const { setBookmarked } = bookmarkSlice.actions;
+export const { setBookmarked } = bookmarkedCharacterSlice.actions;
 
-export default bookmarkSlice;
+export default bookmarkedCharacterSlice.reducer;
