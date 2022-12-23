@@ -1,4 +1,4 @@
-import React, { useState, useContext, memo } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { IoHeartOutline, IoHeart } from "react-icons/io5";
 
 import Button from "./Button";
@@ -10,7 +10,10 @@ import Modal from "./Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash-es";
 
-import { setBookmarked } from "../../../redux-state/bookmark/reducer";
+import {
+  setBookmarked,
+  removeUnbookmarked,
+} from "../../../redux-state/bookmark/reducer";
 
 const Card = styled.div`
   height: 270px;
@@ -48,8 +51,8 @@ const CharacterCard = ({ characterId }) => {
   const characterName = useSelector((state) =>
     get(state, `characters.characters[${characterId}].name`)
   );
-
   const dispatch = useDispatch();
+  const didMount = useRef(false);
 
   const ctx = useContext(BookmarkContext);
 
@@ -60,7 +63,6 @@ const CharacterCard = ({ characterId }) => {
     : (body.style.pointerEvents = "auto");
 
   const handleBookmark = () => {
-    dispatch(setBookmarked(characterId));
     setIsBookmarked(!isBookmarked);
     ctx.onSelectHandler(characterId);
   };
@@ -72,6 +74,18 @@ const CharacterCard = ({ characterId }) => {
   const closeDetailsHandler = () => {
     setShowModal(false);
   };
+
+  useEffect(() => {
+    if (didMount.current) {
+      if (isBookmarked) {
+        dispatch(setBookmarked(characterId));
+      } else {
+        dispatch(removeUnbookmarked(characterId));
+      }
+    } else {
+      didMount.current = true;
+    }
+  }, [isBookmarked]);
 
   return (
     <>
@@ -101,4 +115,4 @@ const CharacterCard = ({ characterId }) => {
   );
 };
 
-export default memo(CharacterCard);
+export default CharacterCard;

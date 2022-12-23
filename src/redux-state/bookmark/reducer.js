@@ -9,13 +9,24 @@ const bookmarkedCharacterSlice = createSlice({
   initialState,
   reducers: {
     setBookmarked(state, action) {
-      console.log(action.payload);
-
       state.bookmarkedCharacterIds.push(action.payload);
+    },
+    removeUnbookmarked(state, action) {
+      console.log(action.payload.toString());
+      state.bookmarkedCharacterIds = state.bookmarkedCharacterIds.filter(
+        (item) => item !== action.payload.toString()
+      );
+    },
+    saveBookmarkedToLs(state) {
+      localStorage.setItem(
+        "favoriteCharacters",
+        JSON.stringify(state.bookmarkedCharacterIds)
+      );
     },
   },
 });
 
-export const { setBookmarked } = bookmarkedCharacterSlice.actions;
+export const { setBookmarked, removeUnbookmarked, saveBookmarkedToLs } =
+  bookmarkedCharacterSlice.actions;
 
 export default bookmarkedCharacterSlice.reducer;
