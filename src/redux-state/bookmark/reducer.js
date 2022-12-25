@@ -1,7 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const getDataFromLs = () => {
+  try {
+    const dataFromLs = JSON.parse(localStorage.getItem("favoriteCharacters"));
+    console.log(dataFromLs);
+    const prevBookmarkedCharacterIds = dataFromLs ? dataFromLs : [];
+    return prevBookmarkedCharacterIds;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const initialState = {
-  bookmarkedCharacterIds: [],
+  bookmarkedCharacterIds: getDataFromLs() || [],
 };
 
 const bookmarkedCharacterSlice = createSlice({
@@ -12,7 +23,6 @@ const bookmarkedCharacterSlice = createSlice({
       state.bookmarkedCharacterIds.push(action.payload);
     },
     removeUnbookmarked(state, action) {
-      console.log(action.payload.toString());
       state.bookmarkedCharacterIds = state.bookmarkedCharacterIds.filter(
         (item) => item !== action.payload.toString()
       );

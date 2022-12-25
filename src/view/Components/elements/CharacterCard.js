@@ -1,12 +1,10 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { IoHeartOutline, IoHeart } from "react-icons/io5";
 
 import Button from "./Button";
 
 import styled from "styled-components";
-import placeholder from "../../../assets/jpg/placeholder.jpg";
-import BookmarkContext from "../../../context/bookmarkContext";
-import Modal from "./Modal";
+
 import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash-es";
 
@@ -15,13 +13,6 @@ import {
   removeUnbookmarked,
 } from "../../../redux-state/bookmark/reducer";
 
-const Card = styled.div`
-  height: 270px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  transition: all ease-in-out 1s;
-`;
 const CardImage = styled.div.attrs((props) => ({
   style: {
     backgroundImage: `url(${props.image})`,
@@ -42,37 +33,24 @@ const CardControls = styled.div`
   padding: 10px;
 `;
 
-const CharacterCard = ({ characterId }) => {
-  const [isBookmarked, setIsBookmarked] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const characterImage = useSelector((state) =>
-    get(state, `characters.characters[${characterId}].image`)
+const CharacterCard = ({ image, name, characterId, setShowModal }) => {
+  const listOfBookamrked = useSelector((state) =>
+    get(state, "bookmarkedCharacterIds.bookmarkedCharacterIds")
   );
-  const characterName = useSelector((state) =>
-    get(state, `characters.characters[${characterId}].name`)
+  const isInitiallyBookmarked = listOfBookamrked.includes(
+    characterId.toString()
   );
+  const [isBookmarked, setIsBookmarked] = useState(isInitiallyBookmarked);
+
   const dispatch = useDispatch();
   const didMount = useRef(false);
 
-  const ctx = useContext(BookmarkContext);
-
-  const image = characterImage ? characterImage : placeholder;
-  const body = document.querySelector("body");
-  showModal
-    ? (body.style.pointerEvents = "none")
-    : (body.style.pointerEvents = "auto");
-
   const handleBookmark = () => {
     setIsBookmarked(!isBookmarked);
-    ctx.onSelectHandler(characterId);
   };
 
   const detailsHandler = () => {
     setShowModal(true);
-  };
-
-  const closeDetailsHandler = () => {
-    setShowModal(false);
   };
 
   useEffect(() => {
@@ -89,28 +67,14 @@ const CharacterCard = ({ characterId }) => {
 
   return (
     <>
-      <Card className={`card`}>
-        <CardImage image={image} />
-        <div className="characterName">{characterName}</div>
-        <CardControls>
-          <div onClick={handleBookmark}>
-            {isBookmarked ? (
-              <IoHeart size={20} />
-            ) : (
-              <IoHeartOutline size={20} />
-            )}
-          </div>
-          <Button onClick={detailsHandler}>Details</Button>
-        </CardControls>
-      </Card>
-      {showModal && (
-        <Modal
-          closeModal={closeDetailsHandler}
-          characterId={characterId}
-          characterImage={image}
-          characterName={characterName}
-        />
-      )}
+      <CardImage image={image} />
+      <div className="characterName">{name}</div>
+      <CardControls>
+        <div onClick={handleBookmark}>
+          {isBookmarked ? <IoHeart size={20} /> : <IoHeartOutline size={20} />}
+        </div>
+        <Button onClick={detailsHandler}>Details</Button>
+      </CardControls>
     </>
   );
 };

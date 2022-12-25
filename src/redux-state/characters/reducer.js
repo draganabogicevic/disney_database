@@ -1,9 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Character from "../../entities/Character";
-import {
-  fetchAllCharacters,
-  fetchAllCharactersByPages,
-} from "../../service/api";
+import { fetchAllCharactersByPages } from "../../service/api";
 const initialState = {
   loading: false,
   characters: {},

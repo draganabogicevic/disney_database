@@ -4,7 +4,7 @@ import walle from "../../../assets/png/pngegg.png";
 import Button from "./Button";
 
 const WalleImg = styled.img`
-  height: 500px;
+  height: 450px;
   @media (max-width: 370px) {
     height: 100px;
   }
@@ -14,8 +14,6 @@ const WalleImg = styled.img`
 `;
 const NoCharactersWrapper = styled.div`
   margin: auto;
-  margin-top: 100px;
-  padding: 30px;
   display: flex;
   justify-content: center;
   height: 450px;
@@ -23,6 +21,7 @@ const NoCharactersWrapper = styled.div`
   border-radius: 50%;
   @media (max-width: 370px) {
     flex-direction: column;
+    margin-bottom: 200px;
   }
 `;
 
@@ -31,7 +30,7 @@ const NoCharacters = () => {
     <NoCharactersWrapper>
       <WalleImg src={walle} alt="sadWallE" />
       <div>
-        <p>
+        <p className="fallbackText">
           Sorry, we have no characters maching your search! Please, try again.
         </p>
         <Link reloadDocument>

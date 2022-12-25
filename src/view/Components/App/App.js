@@ -11,7 +11,6 @@ import Footer from "../Footer";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../globalStyles";
 import { lightTheme, darkTheme } from "../Theme";
-import BookmarkContextProvider from "../../../context/BookmarkContextProvider";
 
 const App = () => {
   const [theme, themeToggler] = useDarkMode();
@@ -28,13 +27,11 @@ const App = () => {
             toggleTheme={themeToggler}
           />
           <ErrorBoundary>
-            <BookmarkContextProvider>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/favorite" element={<MyFavorites />} />
-                <Route path="/about" element={<About />} />
-              </Routes>
-            </BookmarkContextProvider>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/favorite" element={<MyFavorites />} />
+              <Route path="/about" element={<About />} />
+            </Routes>
           </ErrorBoundary>
           <Footer />
         </div>

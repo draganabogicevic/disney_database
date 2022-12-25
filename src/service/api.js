@@ -9,7 +9,7 @@ const Api = axios.create({
 //   return result;
 // };
 
-export const fetchAllCharacters = async (str) => {
+export const fetchCharactersBySearch = async (str) => {
   const result = await Api.get(
     `https://api.disneyapi.dev/character?name=${str}`
   );

@@ -1,5 +1,10 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getSearchedCharacters } from "../../../redux-state/search/reducer";
+
 import { IoSearch } from "react-icons/io5";
 import styled from "styled-components";
+import Button from "./Button";
 
 const Input = styled.input`
   border: none;
@@ -19,9 +24,26 @@ const Wrapper = styled.div`
   }
 `;
 
-const SearchBar = ({ setSearchText, searchText }) => {
+const SearchBar = ({ setSearchText, searchText, setShowSearched }) => {
+  const [query, setQuery] = useState();
+
+  const dispatch = useDispatch();
+
   const handleChange = (event) => {
     setSearchText(event.target.value);
+    setQuery(event.target.value);
+  };
+
+  const onSearchHandler = () => {
+    if (query) {
+      dispatch(getSearchedCharacters(query));
+      setShowSearched(true);
+    }
+  };
+  const onClearHandler = () => {
+    setQuery("");
+    setSearchText("");
+    setShowSearched(false);
   };
 
   return (
@@ -35,6 +57,8 @@ const SearchBar = ({ setSearchText, searchText }) => {
         value={searchText}
         onChange={handleChange}
       />
+      <Button onClick={onSearchHandler}>Search</Button>
+      <Button onClick={onClearHandler}>Clear</Button>
     </Wrapper>
   );
 };
