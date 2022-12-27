@@ -89,10 +89,10 @@ const HomePage = () => {
         <CardWrapper>
           {listOfSearchedCharactersId.length > 1 ? (
             listOfSearchedCharactersId.map((id) => (
-              <Cards characterId={id} key={id} />
+              <Cards characterId={id} key={id} isSearched={showSearched} />
             ))
           ) : listOfSearchedCharactersId.length === 1 ? (
-            <SingleCard characterId={listOfSearchedCharactersId[0]} />
+            <SingleCard characterId={listOfSearchedCharactersId[0]} isSearched={showSearched} />
           ) : (
             <NoCharacters
               setSearchText={setSearchText}
