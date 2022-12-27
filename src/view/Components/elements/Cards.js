@@ -6,7 +6,7 @@ import Modal from "./Modal";
 import SmallCard from "./SmallCard";
 import placeholder from "../../../assets/jpg/placeholder.jpg";
 
-const Cards = ({ characterId, isSearched = false }) => {
+const Cards = ({ characterId, isSearched = false}) => {
   const [showModal, setShowModal] = useState(false);
   const characterImage = useSelector((state) =>
     get(state, `characters.characters[${characterId}].image`)
@@ -24,6 +24,7 @@ const Cards = ({ characterId, isSearched = false }) => {
   // const shouldFetch = !characterImage && !characterName;
 
   // console.log(shouldFetch);
+
 
   const nameToDisplay = isSearched ? searchedCharacterName : characterName;
   const imgToDisplay = isSearched ? searchedCharacterImage : characterImage;

@@ -18,9 +18,10 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   @media (max-width: 370px) {
-    width: 100px;
+    width: 200px;
     margin: auto;
     display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -48,15 +49,15 @@ const SearchBar = ({ setSearchText, searchText, setShowSearched }) => {
 
   return (
     <Wrapper>
-      <div className="searchIcon">
+      <div className="search">
         <IoSearch size={20} />
+        <Input
+          type="text"
+          className="searchInput"
+          value={searchText}
+          onChange={handleChange}
+        />
       </div>
-      <Input
-        type="text"
-        className="searchInput"
-        value={searchText}
-        onChange={handleChange}
-      />
       <Button onClick={onSearchHandler}>Search</Button>
       <Button onClick={onClearHandler}>Clear</Button>
     </Wrapper>

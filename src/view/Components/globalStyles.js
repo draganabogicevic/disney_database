@@ -125,9 +125,14 @@ export const GlobalStyles = createGlobalStyle`
       border: none;
     }
   }
-  .searchIcon {
+  .search {
     color: ${({ theme }) => theme.searchIconAndBorderColor};
-    margin-right: 5px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction:row;
+    @media (max-width: 370px) {
+      margin-bottom: 10px;
+    }
   }
   .searchInput {
     border-bottom: 1px solid ${({ theme }) => theme.searchIconAndBorderColor};
@@ -276,6 +281,13 @@ export const GlobalStyles = createGlobalStyle`
     opacity: 0.5;
   }
   .favWrapper {
-    padding-bottom: 30px;
+    padding-top: 30px;
+    padding-bottom: 150px;
+    @media (max-width: 556px) {
+      padding-bottom: 250px;
+    }
+  }
+  .drawer {
+    background-color: ${({ theme }) => theme.cardAndModalBackground};
   }
   `;
