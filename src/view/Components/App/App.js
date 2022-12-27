@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { useDarkMode } from "../../../hooks/useDarkMode";
 
 import ErrorBoundary from "../ErrorBoundary";
@@ -11,11 +12,15 @@ import Footer from "../Footer";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../globalStyles";
 import { lightTheme, darkTheme } from "../Theme";
-import BookmarkContextProvider from "../../../context/BookmarkContextProvider";
 
 const App = () => {
   const [theme, themeToggler] = useDarkMode();
   const themeMode = theme === "light" ? lightTheme : darkTheme;
+  const history = useHistory();
+
+  useEffect(() => {
+    history.push("/");
+  }, []);
 
   return (
     <ThemeProvider theme={themeMode}>
@@ -28,13 +33,17 @@ const App = () => {
             toggleTheme={themeToggler}
           />
           <ErrorBoundary>
-            <BookmarkContextProvider>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/favorite" element={<MyFavorites />} />
-                <Route path="/about" element={<About />} />
-              </Routes>
-            </BookmarkContextProvider>
+            <Switch>
+              <Route exact path="/">
+                <HomePage />
+              </Route>
+              <Route path="/favorite">
+                <MyFavorites />
+              </Route>
+              <Route path="/about">
+                <About />
+              </Route>
+            </Switch>
           </ErrorBoundary>
           <Footer />
         </div>

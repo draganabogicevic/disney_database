@@ -1,6 +1,8 @@
 import Button from "./Button";
 
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { get } from "lodash-es";
 
 const ModalWrapper = styled.div`
   margin: auto;
@@ -43,16 +45,18 @@ const CharacterName = styled.h3`
   padding: 10px 0;
 `;
 
-const Modal = ({ closeModal, character }) => {
-  console.log(character.image);
+const Modal = ({ closeModal, characterId, characterImage, characterName }) => {
+  const characterFilms = useSelector((state) =>
+    get(state, `characters.characters[${characterId}].films`)
+  );
   return (
     <ModalWrapper className="modalWrapper">
-      <ModalImage image={character.image} />
-      <CharacterName>{character.name}</CharacterName>
+      <ModalImage image={characterImage} />
+      <CharacterName>{characterName}</CharacterName>
       <div>
         Films:
-        {character.films &&
-          character.films.map((film) => <span>{film}, </span>)}
+        {characterFilms &&
+          characterFilms.map((film) => <span key={film}>{film}, </span>)}
       </div>
       <div className="modalRateAndButton">
         <div>stars</div>

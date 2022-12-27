@@ -13,20 +13,20 @@ const Footer = () => {
         <div className="socialLinks">
           <a
             href="https://www.facebook.com/Disney/?brand_redir=277866969252"
-            target="blank"
+            target="_blank"
           >
             <IoLogoFacebook size={30} />
           </a>
-          <a href="https://www.instagram.com/disneyuk/" target="blank">
+          <a href="https://www.instagram.com/disneyuk/" target="_blank">
             <IoLogoInstagram size={30} />
           </a>
           <a
             href="https://www.youtube.com/user/WaltDisneyStudiosUK"
-            target="blank"
+            target="_blank"
           >
             <IoLogoYoutube size={30} />
           </a>
-          <a href="https://twitter.com/Disney_UK" target="blank">
+          <a href="https://twitter.com/Disney_UK" target="_blank">
             <IoLogoTwitter size={30} />
           </a>
         </div>
