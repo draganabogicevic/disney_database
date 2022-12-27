@@ -14,6 +14,8 @@ import Button from "../elements/Button";
 import Loader from "../elements/Loader";
 import SingleCard from "../elements/SingleCard";
 
+import { Skeleton } from "@mui/material";
+
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -66,11 +68,7 @@ const HomePage = () => {
     dispatch(saveBookmarkedToLs());
   }, [listOfBookmarked]);
 
-  if (loading || loadingForSearch) {
-    return <Loader />;
-  }
-
-  console.log(listOfSearchedCharactersId.length);
+  console.log(loading);
   return (
     <MainWrapper>
       <SearchBar
@@ -80,19 +78,40 @@ const HomePage = () => {
       />
       {!showSearched && (
         <CardWrapper>
-          {listOfCharactersId.map((id) => (
-            <Cards characterId={id} key={id} isSearched={showSearched} />
-          ))}
+          {loading
+            ? Array.from(new Array(50)).map((item, index) => (
+                <Skeleton
+                  variant="rounded"
+                  height={270}
+                  width={200}
+                  key={index}
+                />
+              ))
+            : listOfCharactersId.map((id) => (
+                <Cards characterId={id} key={id} isSearched={showSearched} />
+              ))}
         </CardWrapper>
       )}
       {showSearched && (
         <CardWrapper>
-          {listOfSearchedCharactersId.length > 1 ? (
+          {loadingForSearch ? (
+            Array.from(new Array(3)).map((item, index) => (
+              <Skeleton
+                variant="rounded"
+                height={270}
+                width={200}
+                key={index}
+              />
+            ))
+          ) : listOfSearchedCharactersId.length > 1 ? (
             listOfSearchedCharactersId.map((id) => (
               <Cards characterId={id} key={id} isSearched={showSearched} />
             ))
           ) : listOfSearchedCharactersId.length === 1 ? (
-            <SingleCard characterId={listOfSearchedCharactersId[0]} isSearched={showSearched} />
+            <SingleCard
+              characterId={listOfSearchedCharactersId[0]}
+              isSearched={showSearched}
+            />
           ) : (
             <NoCharacters
               setSearchText={setSearchText}
@@ -101,7 +120,6 @@ const HomePage = () => {
           )}
         </CardWrapper>
       )}
-
       <>
         <ButtonWrapper>
           {!showSearched && <Button onClick={onClickHandler}>Load More</Button>}
