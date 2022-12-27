@@ -4,7 +4,7 @@ import { fetchAllCharactersByPages } from "../../service/api";
 export const getCharacters = createAsyncThunk(
   "characters/getCharacters",
   async (num, thunkAPI) => {
-    const response = fetchAllCharactersByPages(num).then((data) => data);
+    const response = await fetchAllCharactersByPages(num).then((data) => data);
     return response;
   }
 );

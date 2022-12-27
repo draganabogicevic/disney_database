@@ -9,7 +9,7 @@ const initialState = {
 export const getSearchedCharacters = createAsyncThunk(
   "searchedCharacters/getSearchedCharacters",
   async (str, thunkAPI) => {
-    const response = fetchCharactersBySearch(str).then((data) => data);
+    const response = await fetchCharactersBySearch(str).then((data) => data);
     return response;
   }
 );

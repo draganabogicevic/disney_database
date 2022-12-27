@@ -86,7 +86,7 @@ const About = () => {
         </p>
       </div>
       {dataToShow.map((item) => (
-        <div className="reportWrapper">
+        <div className="reportWrapper" key={item.title}>
           <a href={item.link} target="_blanck" className="link">
             <h1>{item.title}</h1>
           </a>
@@ -94,7 +94,6 @@ const About = () => {
           <p>{item.text}</p>
         </div>
       ))}
-      <div>S</div>
     </div>
   );
 };

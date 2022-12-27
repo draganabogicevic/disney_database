@@ -258,6 +258,7 @@ export const GlobalStyles = createGlobalStyle`
   .aboutWrapper {
     width: 80%;
     margin: 50px auto 200px auto;
+    padding-bottom: 200px;
   }
   .reportWrapper {
     padding: 30px;
@@ -273,5 +274,8 @@ export const GlobalStyles = createGlobalStyle`
   }
   .link:hover {
     opacity: 0.5;
+  }
+  .favWrapper {
+    padding-bottom: 30px;
   }
   `;
