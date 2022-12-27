@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import Button from "./Button";
@@ -12,11 +13,28 @@ const StyledMenuWrapper = styled.div`
 `;
 
 const Menu = ({ theme, toggleTheme }) => {
+  const [showHomeButton, setShowHomeButton] = useState(false);
+
+  const rendeHomeButton = () => {
+    setShowHomeButton(true);
+  };
+
+  const renderFavButton = () => {
+    setShowHomeButton(false);
+  };
+
   return (
     <StyledMenuWrapper>
-      <Link to="/favorite">
-        <Button>MyFavorites</Button>
-      </Link>
+      {showHomeButton && (
+        <Link to="/">
+          <Button onClick={renderFavButton}>Home</Button>
+        </Link>
+      )}
+      {!showHomeButton && (
+        <Link to="/favorite">
+          <Button onClick={rendeHomeButton}>MyFavorites</Button>
+        </Link>
+      )}
       <Link to="/about">
         <Button>About</Button>
       </Link>
