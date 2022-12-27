@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { useDarkMode } from "../../../hooks/useDarkMode";
 
 import ErrorBoundary from "../ErrorBoundary";
@@ -15,6 +16,11 @@ import { lightTheme, darkTheme } from "../Theme";
 const App = () => {
   const [theme, themeToggler] = useDarkMode();
   const themeMode = theme === "light" ? lightTheme : darkTheme;
+  const history = useHistory();
+
+  useEffect(() => {
+    history.push("/");
+  }, []);
 
   return (
     <ThemeProvider theme={themeMode}>
@@ -27,11 +33,17 @@ const App = () => {
             toggleTheme={themeToggler}
           />
           <ErrorBoundary>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/favorite" element={<MyFavorites />} />
-              <Route path="/about" element={<About />} />
-            </Routes>
+            <Switch>
+              <Route exact path="/">
+                <HomePage />
+              </Route>
+              <Route path="/favorite">
+                <MyFavorites />
+              </Route>
+              <Route path="/about">
+                <About />
+              </Route>
+            </Switch>
           </ErrorBoundary>
           <Footer />
         </div>

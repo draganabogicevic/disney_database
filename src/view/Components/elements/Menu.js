@@ -14,10 +14,10 @@ const StyledMenuWrapper = styled.div`
 const Menu = ({ theme, toggleTheme }) => {
   return (
     <StyledMenuWrapper>
-      <Link to={"/favorite"}>
+      <Link to="/favorite">
         <Button>MyFavorites</Button>
       </Link>
-      <Link to={"/about"}>
+      <Link to="/about">
         <Button>About</Button>
       </Link>
       <Toggler theme={theme} toggleTheme={toggleTheme} />

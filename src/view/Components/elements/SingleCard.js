@@ -34,8 +34,9 @@ const SingleCard = ({ characterId, isSearched }) => {
   };
 
   return (
-    <>
+    <div className="bigCard">
       <BigCard
+        className="bigCard"
         characterId={characterId}
         image={image}
         name={nameToDisplay}
@@ -49,7 +50,7 @@ const SingleCard = ({ characterId, isSearched }) => {
           characterName={characterName}
         />
       )}
-    </>
+    </div>
   );
 };
 

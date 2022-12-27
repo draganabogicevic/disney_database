@@ -20,3 +20,9 @@ export const fetchAllCharactersByPages = async (num) => {
   const result = Api.get(`/characters?page=${num}`);
   return (await result).data.data;
 };
+
+export const fetchCharacterById = async (id) => {
+  const result = Api.get(`/characters/${id}`);
+  console.log(result);
+  return (await result).data;
+};

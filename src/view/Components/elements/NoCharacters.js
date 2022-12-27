@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import walle from "../../../assets/png/pngegg.png";
 import Button from "./Button";
@@ -25,7 +25,15 @@ const NoCharactersWrapper = styled.div`
   }
 `;
 
-const NoCharacters = () => {
+const NoCharacters = ({ setSearchText, setShowSearched }) => {
+  const history = useHistory();
+
+  const onTryAgainHandler = () => {
+    history.push("/");
+    setSearchText("");
+    setShowSearched(false);
+  };
+
   return (
     <NoCharactersWrapper>
       <WalleImg src={walle} alt="sadWallE" />
@@ -33,9 +41,7 @@ const NoCharacters = () => {
         <p className="fallbackText">
           Sorry, we have no characters maching your search! Please, try again.
         </p>
-        <Link reloadDocument>
-          <Button>Try again</Button>
-        </Link>
+        <Button onClick={onTryAgainHandler}>Try again</Button>
       </div>
     </NoCharactersWrapper>
   );

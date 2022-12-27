@@ -48,6 +48,11 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.cardAndModalBackground};
     border: ${({ theme }) => theme.cardAndModalBorder}
   }
+  .bigCard {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 150px;
+  }
   .characterName {
     text-align: center;
     color:  ${({ theme }) => theme.characterNameColor};
@@ -249,5 +254,24 @@ export const GlobalStyles = createGlobalStyle`
     100% {
       transform: rotate(360deg);
     }
+  }
+  .aboutWrapper {
+    width: 80%;
+    margin: 50px auto 200px auto;
+  }
+  .reportWrapper {
+    padding: 30px;
+    background-color: ${({ theme }) => theme.cardAndModalBackground};
+    border: ${({ theme }) => theme.cardAndModalBorder};
+    box-shadow: ${({ theme }) => theme.cardAndModalShadow};
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .link {
+    color: ${({ theme }) => theme.socialIconsColor};
+  }
+  .link:hover {
+    opacity: 0.5;
   }
   `;

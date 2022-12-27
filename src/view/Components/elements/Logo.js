@@ -8,7 +8,7 @@ const LogoImg = styled.img`
 
 const Logo = ({ themeMode }) => {
   return (
-    <Link to={"/"}>
+    <Link to="/">
       <LogoImg src={themeMode.logo} alt="photo" />
     </Link>
   );

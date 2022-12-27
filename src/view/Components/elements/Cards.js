@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { get } from "lodash-es";
 
@@ -21,8 +21,13 @@ const Cards = ({ characterId, isSearched = false }) => {
     get(state, `searchedCharacters.searchedCharacters[${characterId}].name`)
   );
 
+  // const shouldFetch = !characterImage && !characterName;
+
+  // console.log(shouldFetch);
+
   const nameToDisplay = isSearched ? searchedCharacterName : characterName;
   const imgToDisplay = isSearched ? searchedCharacterImage : characterImage;
+
   const image = imgToDisplay ? imgToDisplay : placeholder;
   const body = document.querySelector("body");
   showModal

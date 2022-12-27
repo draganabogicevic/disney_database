@@ -1,18 +1,11 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import Character from "../../entities/Character";
-import { fetchAllCharactersByPages } from "../../service/api";
+import { getCharacters } from "./action";
+
 const initialState = {
   loading: false,
   characters: {},
 };
-
-export const getCharacters = createAsyncThunk(
-  "characters/getCharacters",
-  async (num, thunkAPI) => {
-    const response = fetchAllCharactersByPages(num).then((data) => data);
-    return response;
-  }
-);
 
 const characterSlices = createSlice({
   name: "characters",

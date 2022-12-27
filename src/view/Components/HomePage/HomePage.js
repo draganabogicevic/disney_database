@@ -7,7 +7,7 @@ import CardWrapper from "../elements/CardWrapper";
 import SearchBar from "../elements/SearchBar";
 import NoCharacters from "../elements/NoCharacters";
 import { useDispatch, useSelector } from "react-redux";
-import { getCharacters } from "../../../redux-state/characters/reducer";
+import { getCharacters } from "../../../redux-state/characters/action";
 import { get } from "lodash-es";
 import { saveBookmarkedToLs } from "../../../redux-state/bookmark/reducer";
 import Button from "../elements/Button";
@@ -87,14 +87,17 @@ const HomePage = () => {
       )}
       {showSearched && (
         <CardWrapper>
-          {listOfSearchedCharactersId.map((id) =>
-            listOfSearchedCharactersId.length > 1 ? (
-              <Cards characterId={id} key={id} isSearched={showSearched} />
-            ) : listOfSearchedCharactersId.length === 1 ? (
-              <SingleCard characterId={id} isSearched={showSearched} />
-            ) : (
-              <NoCharacters />
-            )
+          {listOfSearchedCharactersId.length > 1 ? (
+            listOfSearchedCharactersId.map((id) => (
+              <Cards characterId={id} key={id} />
+            ))
+          ) : listOfSearchedCharactersId.length === 1 ? (
+            <SingleCard characterId={listOfSearchedCharactersId[0]} />
+          ) : (
+            <NoCharacters
+              setSearchText={setSearchText}
+              setShowSearched={setShowSearched}
+            />
           )}
         </CardWrapper>
       )}

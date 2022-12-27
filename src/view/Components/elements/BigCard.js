@@ -3,10 +3,13 @@ import CharacterCard from "./CharacterCard";
 
 const CardBig = styled.div`
   height: 600px;
+  width: 50%;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  transition: all ease-in-out 1s;
+  @media (max-width: 779px) {
+    width: 90%;
+  }
 `;
 
 const BigCard = ({ name, image, characterId, setShowModal }) => {
