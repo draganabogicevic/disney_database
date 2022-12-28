@@ -1,4 +1,5 @@
 import Button from "./Button";
+import Stars from "./Stars";
 
 import styled from "styled-components";
 import { useSelector } from "react-redux";
@@ -53,13 +54,13 @@ const Modal = ({ closeModal, characterId, characterImage, characterName }) => {
     <ModalWrapper className="modalWrapper">
       <ModalImage image={characterImage} />
       <CharacterName>{characterName}</CharacterName>
-      <div>
+      <div className="filmsWrapper">
         Films:
         {characterFilms &&
           characterFilms.map((film) => <span key={film}>{film}, </span>)}
       </div>
       <div className="modalRateAndButton">
-        <div>stars</div>
+        <Stars characterId={characterId} />
         <Button onClick={closeModal}>Close</Button>
       </div>
     </ModalWrapper>
