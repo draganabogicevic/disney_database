@@ -31,9 +31,7 @@ const rateCharacterSlice = createSlice({
         ...newRated,
       };
     },
-    removeRate(state, action) {
-      delete state.rateCharacters[action.payload];
-    },
+
     saveRatedToLs(state) {
       localStorage.setItem(
         "ratedCharacters",
@@ -43,7 +41,6 @@ const rateCharacterSlice = createSlice({
   },
 });
 
-export const { setRate, removeRate, saveRatedToLs } =
-  rateCharacterSlice.actions;
+export const { setRate, saveRatedToLs } = rateCharacterSlice.actions;
 
 export default rateCharacterSlice.reducer;

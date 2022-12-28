@@ -1,14 +1,17 @@
 import { get } from "lodash-es";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveRatedToLs, setRate } from "../../../redux-state/rate/reducer";
+import {
+  removeRate,
+  saveRatedToLs,
+  setRate,
+} from "../../../redux-state/rate/reducer";
+import Button from "./Button";
 
 const Stars = ({ characterId, characterName }) => {
   const prevRate = useSelector((state) =>
     get(state, `ratedCharacters.rateCharacters[${characterId}].rating`)
   );
-
-  console.log(prevRate);
 
   const [rating, setRating] = useState(prevRate);
   const [hover, setHover] = useState(0);
@@ -19,8 +22,6 @@ const Stars = ({ characterId, characterName }) => {
     dispatch(setRate({ id: characterId, rating: rating }));
     dispatch(saveRatedToLs());
   }, [rating]);
-
-  console.log(characterId);
 
   return (
     <div className="star-rating">
@@ -37,7 +38,15 @@ const Stars = ({ characterId, characterName }) => {
             onMouseEnter={() => setHover(index)}
             onMouseLeave={() => setHover(rating)}
           >
-            <span className="star">&#9733;</span>
+            <span
+              className="star"
+              onDoubleClick={() => {
+                setRating(0);
+                setHover(0);
+              }}
+            >
+              &#9733;
+            </span>
           </button>
         );
       })}
