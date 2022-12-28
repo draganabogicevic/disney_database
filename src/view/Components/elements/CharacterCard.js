@@ -45,7 +45,7 @@ const CharacterCard = ({ image, name, characterId, setShowModal }) => {
     Object.keys(get(state, "characters.characters"))
   );
   const shouldFetch = !listOfFetchedCharacters.includes(characterId);
-  
+
   const [isBookmarked, setIsBookmarked] = useState(isInitiallyBookmarked);
 
   const dispatch = useDispatch();
@@ -60,6 +60,12 @@ const CharacterCard = ({ image, name, characterId, setShowModal }) => {
   };
 
   useEffect(() => {
+    if (shouldFetch) {
+      dispatch(getCharacter(characterId));
+    }
+  }, []);
+
+  useEffect(() => {
     if (didMount.current) {
       if (isBookmarked) {
         dispatch(setBookmarked(characterId));
@@ -70,8 +76,6 @@ const CharacterCard = ({ image, name, characterId, setShowModal }) => {
       didMount.current = true;
     }
   }, [isBookmarked]);
-
-
 
   return (
     <>

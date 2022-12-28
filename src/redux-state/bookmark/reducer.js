@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { uniq } from "lodash-es";
 
 const getDataFromLs = () => {
   try {
@@ -29,7 +30,7 @@ const bookmarkedCharacterSlice = createSlice({
     saveBookmarkedToLs(state) {
       localStorage.setItem(
         "favoriteCharacters",
-        JSON.stringify(state.bookmarkedCharacterIds)
+        JSON.stringify(uniq(state.bookmarkedCharacterIds))
       );
     },
   },
