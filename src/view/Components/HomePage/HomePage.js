@@ -11,7 +11,6 @@ import { getCharacters } from "../../../redux-state/characters/action";
 import { get } from "lodash-es";
 import { saveBookmarkedToLs } from "../../../redux-state/bookmark/reducer";
 import Button from "../elements/Button";
-import Loader from "../elements/Loader";
 import SingleCard from "../elements/SingleCard";
 
 import { Skeleton } from "@mui/material";
@@ -68,7 +67,6 @@ const HomePage = () => {
     dispatch(saveBookmarkedToLs());
   }, [listOfBookmarked]);
 
-  console.log(loading);
   return (
     <MainWrapper>
       <SearchBar
