@@ -39,6 +39,7 @@ export const lightTheme = {
   inputText: "darkcyan",
   socialIconsColor: "darkcyan",
   footerTextColor: "darkcyan",
+  starsColor: "darkcyan",
 };
 export const darkTheme = {
   body: "#363537",
@@ -60,4 +61,5 @@ export const darkTheme = {
   inputText: "#ffe549",
   socialIconsColor: "#ffe549",
   footerTextColor: "#ffe549",
+  starsColor: "#ffe549",
 };

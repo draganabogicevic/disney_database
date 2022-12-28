@@ -60,7 +60,7 @@ const Modal = ({ closeModal, characterId, characterImage, characterName }) => {
           characterFilms.map((film) => <span key={film}>{film}, </span>)}
       </div>
       <div className="modalRateAndButton">
-        <Stars characterId={characterId} />
+        <Stars characterId={characterId} characterName={characterName} />
         <Button onClick={closeModal}>Close</Button>
       </div>
     </ModalWrapper>

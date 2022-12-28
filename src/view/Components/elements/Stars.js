@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveRatedToLs, setRate } from "../../../redux-state/rate/reducer";
 
-const Stars = ({ characterId }) => {
+const Stars = ({ characterId, characterName }) => {
   const prevRate = useSelector((state) =>
     get(state, `ratedCharacters.rateCharacters[${characterId}].rating`)
   );
@@ -24,7 +24,7 @@ const Stars = ({ characterId }) => {
 
   return (
     <div className="star-rating">
-      <p className="rateText">Rate the character:</p>
+      <p className="rateText">Rate the {characterName}:</p>
       {[...Array(5)].map((star, index) => {
         index += 1;
         return (

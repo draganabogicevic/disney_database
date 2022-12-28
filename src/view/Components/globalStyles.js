@@ -59,14 +59,7 @@ export const GlobalStyles = createGlobalStyle`
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
       1px 1px 0 #000;
   }
-//   .star {
-//     color:  ${({ theme }) => theme.characterNameColor};
-//     font-size: 20px;
-//     text-shadow: -1px 1px 0 #000,
-// 				  1px 1px 0 #000,
-// 				 1px -1px 0 #000;
-// 				-1px -1px 0 #000;
-// }
+
   .arrowUp {
     width: 82%;
     margin: auto;
@@ -91,7 +84,7 @@ export const GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }
   .on {
-    color: #000;
+    color: ${({ theme }) => theme.searchIconAndBorderColor};
   }
   .off {
     color: #ccc;
