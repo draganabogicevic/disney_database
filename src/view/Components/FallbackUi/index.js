@@ -45,7 +45,7 @@ const FallbackUi = ({ error }) => {
             Ooooooops! Some error happened! Please click on button below to
             start again.
           </p>
-          <Link reloadDocument>
+          <Link to="/">
             <Button>Go Home</Button>
           </Link>
         </TextAndButtonWrapper>

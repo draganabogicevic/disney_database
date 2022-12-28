@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
 import { useDispatch } from "react-redux";
 import { getSearchedCharacters } from "../../../redux-state/search/reducer";
-
+import { debounce } from "lodash-es";
 import { IoSearch } from "react-icons/io5";
 import styled from "styled-components";
-import Button from "./Button";
 
 const Input = styled.input`
   border: none;
@@ -35,17 +35,26 @@ const SearchBar = ({ setSearchText, searchText, setShowSearched }) => {
     setQuery(event.target.value);
   };
 
-  const onSearchHandler = () => {
+  const debouncedResults = useMemo(() => {
+    return debounce(handleChange, 1000);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      debouncedResults.cancel();
+    };
+  });
+
+  useEffect(() => {
     if (query) {
       dispatch(getSearchedCharacters(query));
       setShowSearched(true);
+    } else {
+      setQuery("");
+      setSearchText("");
+      setShowSearched(false);
     }
-  };
-  const onClearHandler = () => {
-    setQuery("");
-    setSearchText("");
-    setShowSearched(false);
-  };
+  }, [query]);
 
   return (
     <Wrapper>
@@ -54,12 +63,9 @@ const SearchBar = ({ setSearchText, searchText, setShowSearched }) => {
         <Input
           type="text"
           className="searchInput"
-          value={searchText}
-          onChange={handleChange}
+          onChange={debouncedResults}
         />
       </div>
-      <Button onClick={onSearchHandler}>Search</Button>
-      <Button onClick={onClearHandler}>Clear</Button>
     </Wrapper>
   );
 };

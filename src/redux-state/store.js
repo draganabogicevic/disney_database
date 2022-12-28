@@ -10,8 +10,10 @@ const store = configureStore({
     bookmarkedCharacterIds: bookmarkedCharacterSlice,
     searchedCharacters: searchedCharactersSlices,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
-
-console.log(store.getState());
 
 export default store;

@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const getDataFromLs = () => {
   try {
     const dataFromLs = JSON.parse(localStorage.getItem("favoriteCharacters"));
-    console.log(dataFromLs);
     const prevBookmarkedCharacterIds = dataFromLs ? dataFromLs : [];
     return prevBookmarkedCharacterIds;
   } catch (err) {
