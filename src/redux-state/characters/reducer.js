@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Character from "../../entities/Character";
-import { getCharacters } from "./action";
+import { getCharacters, getCharacter } from "./action";
 
 const initialState = {
   loading: false,
@@ -27,6 +27,19 @@ const characterSlices = createSlice({
       state.characters = { ...state.characters, ...newCharacter };
     },
     [getCharacters.rejected]: (state) => {
+      state.loading = false;
+    },
+    [getCharacter.pending]: (state) => {
+      state.loading = true;
+    },
+    [getCharacter.fulfilled]: (state, action) => {
+      state.loading = false;
+      const newCharacter = {
+        [action.payload._id]: new Character(action.payload).characterObject,
+      } 
+      state.characters = { ...state.characters, ...newCharacter };
+    },
+    [getCharacter.rejected]: (state) => {
       state.loading = false;
     },
   },

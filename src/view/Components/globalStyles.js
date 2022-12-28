@@ -213,6 +213,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   .link:hover {
     opacity: 0.5;
+    cursor: pointer;
   }
   .favWrapper {
     padding-top: 30px;
