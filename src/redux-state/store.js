@@ -11,11 +11,9 @@ const store = configureStore({
     searchedCharacters: searchedCharactersSlices,
   },
   middleware: (getDefaultMiddleware) =>
-  getDefaultMiddleware({
-    serializableCheck: false,
-  }),
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
-
-console.log(store.getState());
 
 export default store;

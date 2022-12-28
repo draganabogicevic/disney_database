@@ -66,8 +66,6 @@ const SearchBar = ({ setSearchText, searchText, setShowSearched }) => {
           onChange={debouncedResults}
         />
       </div>
-      {/* <Button onClick={onSearchHandler}>Search</Button> */}
-      {/* <Button onClick={onClearHandler}>Clear</Button> */}
     </Wrapper>
   );
 };

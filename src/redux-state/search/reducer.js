@@ -34,8 +34,6 @@ const searchedCharactersSlices = createSlice({
       state.searchedCharacters = {
         ...newCharacter,
       };
-
-      console.log(state.searchedCharacters);
     },
     [getSearchedCharacters.rejected]: (state) => {
       state.loadingForSearch = false;
