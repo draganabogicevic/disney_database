@@ -37,6 +37,7 @@ const CharacterCard = ({ image, name, characterId, setShowModal }) => {
   const listOfBookamrked = useSelector((state) =>
     get(state, "bookmarkedCharacterIds.bookmarkedCharacterIds")
   );
+
   const isInitiallyBookmarked = listOfBookamrked.includes(
     characterId.toString()
   );

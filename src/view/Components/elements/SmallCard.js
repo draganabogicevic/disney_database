@@ -9,7 +9,13 @@ const CardSmall = styled.div`
   transition: all ease-in-out 1s;
 `;
 
-const SmallCard = ({ name, image, characterId, setShowModal }) => {
+const SmallCard = ({
+  name,
+  image,
+  characterId,
+  setShowModal,
+  characterRate,
+}) => {
   return (
     <CardSmall className="card">
       <CharacterCard
@@ -17,6 +23,7 @@ const SmallCard = ({ name, image, characterId, setShowModal }) => {
         image={image}
         characterId={characterId}
         setShowModal={setShowModal}
+        characterRate={characterRate}
       />
     </CardSmall>
   );

@@ -36,6 +36,10 @@ const TextAndButtonWrapper = styled.div`
 `;
 
 const FallbackUi = ({ error }) => {
+  const reloadPage = () => {
+    window.location.reload();
+  };
+
   return (
     <>
       <FallbackWrapper className="fallbackWrapper">
@@ -45,9 +49,8 @@ const FallbackUi = ({ error }) => {
             Ooooooops! Some error happened! Please click on button below to
             start again.
           </p>
-          <Link to="/">
-            <Button>Go Home</Button>
-          </Link>
+
+          <Button onClick={reloadPage}>Go Home</Button>
         </TextAndButtonWrapper>
       </FallbackWrapper>
     </>
