@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import Button from "./Button";
 import Toggler from "./Toggler";
@@ -13,31 +13,28 @@ const StyledMenuWrapper = styled.div`
 `;
 
 const Menu = ({ theme, toggleTheme }) => {
-  const [showHomeButton, setShowHomeButton] = useState(false);
-
-  const rendeHomeButton = () => {
-    setShowHomeButton(true);
-  };
-
-  const renderFavButton = () => {
-    setShowHomeButton(false);
-  };
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+  const isFavorite = location.pathname === "/favorite";
+  const isAbout = location.pathname === "/about";
 
   return (
     <StyledMenuWrapper>
-      {showHomeButton && (
+      {!isHome && (
         <Link to="/">
-          <Button onClick={renderFavButton}>Home</Button>
+          <Button>Home</Button>
         </Link>
       )}
-      {!showHomeButton && (
+      {!isFavorite && (
         <Link to="/favorite">
-          <Button onClick={rendeHomeButton}>MyFavorites</Button>
+          <Button>MyFavorites</Button>
         </Link>
       )}
-      <Link to="/about">
-        <Button>About</Button>
-      </Link>
+      {!isAbout && (
+        <Link to="/about">
+          <Button>About</Button>
+        </Link>
+      )}
       <Toggler theme={theme} toggleTheme={toggleTheme} />
     </StyledMenuWrapper>
   );

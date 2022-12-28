@@ -12,6 +12,7 @@ import {
   setBookmarked,
   removeUnbookmarked,
 } from "../../../redux-state/bookmark/reducer";
+import { getCharacter } from "../../../redux-state/characters/action";
 
 const CardImage = styled.div.attrs((props) => ({
   style: {
@@ -37,10 +38,14 @@ const CharacterCard = ({ image, name, characterId, setShowModal }) => {
   const listOfBookamrked = useSelector((state) =>
     get(state, "bookmarkedCharacterIds.bookmarkedCharacterIds")
   );
-
   const isInitiallyBookmarked = listOfBookamrked.includes(
     characterId.toString()
   );
+  const listOfFetchedCharacters = useSelector((state) =>
+    Object.keys(get(state, "characters.characters"))
+  );
+  const shouldFetch = !listOfFetchedCharacters.includes(characterId);
+  
   const [isBookmarked, setIsBookmarked] = useState(isInitiallyBookmarked);
 
   const dispatch = useDispatch();
@@ -65,6 +70,8 @@ const CharacterCard = ({ image, name, characterId, setShowModal }) => {
       didMount.current = true;
     }
   }, [isBookmarked]);
+
+
 
   return (
     <>
