@@ -112,6 +112,7 @@ const About = () => {
           text={item.text}
           title={item.title}
           subTitle={item.subTitle}
+          link={item.link}
         />
       ))}
     </div>
